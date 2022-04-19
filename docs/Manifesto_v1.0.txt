@@ -1,0 +1,24 @@
+---------------Methods Location
+All retrieve methods: Queries
+CUD-methods: Commands
+
+
+---------------Methods Logic rules
+1. Use Async methods if possible
+2. DELETE methods do not delete anything from database: you fill next attributes -> DeletedAt , DeletedBy - 'admin', DeletedReason - 'admin decision'
+3. When you RETRIEVE something, check if an object was not deleted (deletedBy is empty for instance)
+4. THINK OF REPLIES! EACH REPLY should inherit from CommonReply. Replies are dublicated in DTOs (api.models) and Domain (Watchman.Domain)
+
+
+
+---------------Controllers
+1. Must be partial (look at DictionariesController)
+
+		DictionariesController -> contains only resolving of mediatr and mapper
+			DictionariesController.Countries -> Works Only with countries
+			DictionariesController.Genres -> Will Work Only with genres
+			ETC.
+
+----------------DI
+1. All DI are taken place in next class -> Watchman.Infrastructure.ServiceCollectionExtensions -> AddInfrastructure() // you may find it in startup!
+2. MappingProfiles are added in startup in AddApplication
